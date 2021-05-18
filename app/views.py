@@ -17,3 +17,16 @@ def add_entry(response):
 	else:
 		form = EntryForm()
 	return render(response, "app/add_entry.html", {'form': form})
+
+def entry_list(response):
+	all_entries = Entry.objects.all().order_by('-date')
+	params = {
+		"entries": all_entries
+	}
+	if response.method=="POST":
+		form = EntryForm(response.POST)
+		if form.is_valid:
+			model = form.save(commit=False)
+			model.save()
+	params["form"] = EntryForm()
+	return render(response, "app/entry_list.html", params)
