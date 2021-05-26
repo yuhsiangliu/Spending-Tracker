@@ -24,9 +24,22 @@ def entry_list(response):
 		"entries": all_entries
 	}
 	if response.method=="POST":
-		form = EntryForm(response.POST)
-		if form.is_valid:
-			model = form.save(commit=False)
-			model.save()
+		if "add-entry" in response.POST:	
+			form = EntryForm(response.POST)
+			if form.is_valid:
+				model = form.save(commit=False)
+				model.save()
+		elif "add-category" in response.POST:
+			form_c = CategoryForm(response.POST)
+			if form_c.is_valid:
+				model = form_c.save(commit=False)
+				model.save()
+		elif "add-store" in response.POST:
+			form_s = StoreForm(response.POST)
+			if form_s.is_valid:
+				model = form_s.save(commit=False)
+				model.save()
 	params["form"] = EntryForm()
+	params["form_c"] = CategoryForm()
+	params["form_s"] = StoreForm()
 	return render(response, "app/entry_list.html", params)
