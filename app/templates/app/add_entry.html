@@ -1,11 +1,3 @@
-{% extends 'app/base.html' %}
-
-{% block title %}
-Add a new entry
-{% endblock %}
-
-{% block content %}
-
 <form class="row g-3" method="post">
 	{% csrf_token %}
   	<div class="col-md-6">
@@ -58,6 +50,3 @@ Add a new entry
     {%  include "app/add_store.html" with form=form_s %}
   </div>
 </div>
-
-
-{% endblock %}

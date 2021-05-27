@@ -9,16 +9,6 @@ import csv
 def home(request):
 	return render(request, "app/home.html")
 
-def add_entry(request):
-	if request.method=="POST":
-		form = EntryForm(request.POST)
-		if form.is_valid:
-			model = form.save(commit=False)
-			model.save()
-	else:
-		form = EntryForm()
-	return render(request, "app/add_entry.html", {'form': form})
-
 def entry_list(request):
 	all_entries = Entry.objects.all().order_by('-date')
 	params = {
