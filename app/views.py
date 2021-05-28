@@ -12,8 +12,16 @@ def home(request):
 def entry_list(request):
 	all_entries = Entry.objects.all().order_by('-date')
 	params = {
-		"entries": all_entries
+		"entries": all_entries,
+		"entry_clicked": False,
 	}
+	if request.method=="GET":
+		try:
+			entry_id = request.GET["e"]
+			params["entry_clicked"] = True
+			params["opened_entry"] = Entry.objects.get(pk=entry_id)
+		except:
+			pass
 	if request.method=="POST":
 		if "download-data" in request.POST:
 			response = HttpResponse('text/csv')

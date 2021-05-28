@@ -8,11 +8,16 @@ Spending Tracker
 
 <div class="container">
 	<div class="row center">
+		<div class="col-10">
+			<h1>Spending Tracker</h1>
+		</div>
 		<div class="col-md-6">
-			<h1>Spending Tracker </h1>
 			<div style="margin-top:15px; margin-bottom:5px;">
 				<button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#add-form">
 					Add a new expense
+				</button>
+				<button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#filter-entries">
+					Filter expenses
 				</button>
 				<form method="POST" style="display:inline;">
 					{% csrf_token %}
@@ -21,7 +26,18 @@ Spending Tracker
 					</button>
 				</form>
 			</div>
-			<table class="table table-sm table-hover">
+		</div>
+		<div class="col-md-4">
+			<div style="margin-top:15px; margin-bottom:5px;">
+				{% if entry_clicked %}
+					<button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#edit-form">
+						Edit
+					</button>
+				{% endif %}
+			</div>
+		</div>
+		<div class="col-md-6">
+			<table class="table table-sm table-hover user-select-none">
 				<thead>
 					<tr>
 						<th scope="col">Date</th>
@@ -38,11 +54,22 @@ Spending Tracker
 							<th scope="col">{{entry.category}}</th>
 							<th scope="col">{{entry.store}}</th>
 							<th scope="col">{{entry.cost}}</th>
-							<th scope="col"></th>
+							<th scope="col">
+								<form method="GET">
+									<button class="btn btn-dark btn-sm" type="submit" name="e" value={{entry.id}}>view</button>
+								</form>
+							</th>
 						</tr>
 					{% endfor %}
 				</tbody>
 			</table>
+		</div>
+		<div class="col-md-4">
+			<div>
+				{% if entry_clicked %}
+					{% include "app/item_list.html" with entry=opened_entry %}
+				{% endif %}
+			</div>
 		</div>
 	</div>
 </div>

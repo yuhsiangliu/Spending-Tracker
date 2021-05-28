@@ -1,0 +1,35 @@
+<div class="card border-dark" style="width: 36rem;">
+    <div class="card-body">
+        <h5 class="card-title"><a href="./" class="btn-close float-end"></a></h5>
+        <p class="card-text table-responsive">
+	        <table class="table table-sm table-borderless">
+	            <tbody>
+	                <tr>
+	                    <th>Date:</th> <th>{{entry.date}}</th>
+	                </tr>
+	                <tr>
+	                    <th>Category:</th> <th>{{entry.category}}</th>
+	                </tr>
+	                <tr>
+	                    <th>Store:</th> <th>{{entry.store}}</th>
+	                </tr>
+	                <tr>
+	                    <th>Amount:</th> <th>{{entry.cost}}</th>
+	                </tr>
+	            </tbody>
+	        </table>
+        </p>
+    </div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">{% if entry.note %}{{entry.note}}{% endif %}</li>
+  	</ul>
+  	<div class="card-body">
+		Items:
+		<ul>
+			<li>Nothing added yet</li>
+		</ul>
+		<button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#add-item">
+			Add an item
+		</button>
+    </div>
+</div>
