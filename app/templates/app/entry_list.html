@@ -67,7 +67,7 @@ Spending Tracker
 		<div class="col-md-4">
 			<div>
 				{% if entry_clicked %}
-					{% include "app/item_list.html" with entry=opened_entry %}
+					{% include "app/item_list.html" with entry=opened_entry form=add_item_form%}
 				{% endif %}
 			</div>
 		</div>
@@ -83,7 +83,7 @@ Spending Tracker
         		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       		</div>
       		<div class="modal-body">
-        		{%  include "app/add_entry.html" with form=form form_c=form_c from_s=form_s %}
+        		{%  include "app/add_entry.html" with form=form form_c=form_c form_s=form_s %}
       		</div>
     	</div>
   	</div>

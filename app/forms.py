@@ -37,4 +37,9 @@ class EntryForm(ModelForm):
 class ItemForm(ModelForm): 
 	class Meta:
 		model = Item
-		fields = ['name', 'amount', 'price', 'entry']
+		fields = ['name', 'amount', 'price']
+		widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control border border-dark', 'placeholder': 'Item', }),
+            'amount': forms.NumberInput(attrs={'class': 'form-control border border-dark', 'placeholder': 'Amount', }),
+            'price': forms.NumberInput(attrs={'class': 'form-control border border-dark', 'placeholder': 'Price', }),
+        }

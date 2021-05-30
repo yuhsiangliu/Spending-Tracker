@@ -24,12 +24,25 @@
     <li class="list-group-item">{% if entry.note %}{{entry.note}}{% endif %}</li>
   	</ul>
   	<div class="card-body">
-		Items:
+		{% if entry.item_set.all %}
 		<ul>
-			<li>Nothing added yet</li>
+			{% for item in entry.item_set.all %}
+			<li>{{ item.name }} (x{{ item.amount }}): {{ item.price }}</li>
+			{% endfor %}
 		</ul>
-		<button type="button" class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#add-item">
-			Add an item
-		</button>
+		{% else %}
+		<p>No item added yet</p>
+		{% endif %}
+		<form method="POST">
+			{% csrf_token %}
+			<div class="input-group mb-3">
+				{{ form.name }}
+				{{ form.amount }}
+				{{ form.price }}
+				<button type="submit" class="btn btn-outline-dark btn-sm" name="add-item">
+					Add an item
+				</button>
+			</div>
+		</form>
     </div>
 </div>

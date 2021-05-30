@@ -15,15 +15,23 @@ def entry_list(request):
 		"entries": all_entries,
 		"entry_clicked": False,
 	}
-	if request.method=="GET":
-		try:
-			entry_id = request.GET["e"]
-			params["entry_clicked"] = True
-			params["opened_entry"] = Entry.objects.get(pk=entry_id)
-		except:
-			pass
+	try:
+		entry_id = request.GET["e"]
+		params["entry_clicked"] = True
+		params["opened_entry"] = Entry.objects.get(pk=entry_id)
+		params["add_item_form"] = ItemForm(instance=params["opened_entry"])
+	except:
+		pass
 	if request.method=="POST":
-		if "download-data" in request.POST:
+		if "add-item" in request.POST:
+			form = ItemForm(request.POST, instance=params["opened_entry"])
+			if form.is_valid:
+				model = form.save()
+				model.save()
+				print('Saved?')
+			else:
+				print('Failed?')
+		elif "download-data" in request.POST:
 			response = HttpResponse('text/csv')
 			response['Content-Disposition'] = 'attachment; filename=all_expenses.csv'
 			writer = csv.writer(response)
