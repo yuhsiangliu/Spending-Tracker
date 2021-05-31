@@ -83,7 +83,7 @@ Spending Tracker
         		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       		</div>
       		<div class="modal-body">
-        		{%  include "app/add_entry.html" with form=form key=add %}
+        		{%  include "app/add_entry.html" with form=form key=add form_s=form_s form_c=form_c %}
       		</div>
     	</div>
   	</div>
@@ -93,7 +93,7 @@ Spending Tracker
 	<div class="modal-dialog">
     	<div class="modal-content">
       		<div class="modal-header">
-        		<h5 class="modal-title" id="add-form-label">ADD A NEW EXPENSE</h5>
+        		<h5 class="modal-title" id="add-form-label">FILTER EXPENSES</h5>
         		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       		</div>
       		<div class="modal-body">
@@ -107,36 +107,14 @@ Spending Tracker
 	<div class="modal-dialog">
     	<div class="modal-content">
       		<div class="modal-header">
-        		<h5 class="modal-title" id="add-form-label">ADD A NEW EXPENSE</h5>
+        		<h5 class="modal-title" id="add-form-label">EDIT THE EXPENSE</h5>
         		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       		</div>
       		<div class="modal-body">
-        		E
+        		{%  include "app/add_entry.html" with form=form_e key=edit form_s=form_s form_c=form_c %}
       		</div>
     	</div>
   	</div>
 </div>
-
-
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight1" aria-labelledby="offcanvasRight1Label">
-  <div class="offcanvas-header">
-    <h5 id="offcanvasRight1Label">ADD A NEW CATEGORY</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    {%  include "app/add_category.html" with form=form_c %}
-  </div>
-</div>
-
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight2" aria-labelledby="offcanvasRight2Label">
-  <div class="offcanvas-header">
-    <h5 id="offcanvasRight2Label">ADD A NEW STORE</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    {%  include "app/add_store.html" with form=form_s %}
-  </div>
-</div>
-
 
 {% endblock %}

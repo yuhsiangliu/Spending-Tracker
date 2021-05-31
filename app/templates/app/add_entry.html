@@ -27,7 +27,7 @@
   	<div class="col-md-8">
   	</div>
   	<div class="col-md-4">
-    	<button type="submit" name="{{key}}-entry" class="form-control btn btn-outline-secondary">Add</button>
+    	<button type="submit" name="{{key}}-entry" class="form-control btn btn-outline-secondary">{% if key == 'add' %}Add{% else %}Edit{% endif %}</button>
   	</div>
 </form>
 

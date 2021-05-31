@@ -21,7 +21,8 @@ def entry_list(request):
 		entry_id = request.GET["e"]
 		params["entry_clicked"] = True
 		params["opened_entry"] = Entry.objects.get(pk=entry_id)
-		params["add_item_form"] = ItemForm(initial={"Entry":params["opened_entry"]})
+		params["add_item_form"] = ItemForm()
+		params["form_e"] = EntryForm(instance=params["opened_entry"])
 	except:
 		pass
 	if request.method=="POST":
@@ -44,6 +45,11 @@ def entry_list(request):
 			return response
 		elif "add-entry" in request.POST:	
 			form = EntryForm(request.POST)
+			if form.is_valid():
+				model = form.save(commit=False)
+				model.save()
+		elif "edit-entry" in request.POST:
+			form = EntryForm(request.POST, instance=params["opened_entry"])
 			if form.is_valid():
 				model = form.save(commit=False)
 				model.save()
