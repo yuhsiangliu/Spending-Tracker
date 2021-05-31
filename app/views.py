@@ -25,6 +25,11 @@ def entry_list(request):
 		params["form_e"] = EntryForm(instance=params["opened_entry"])
 	except:
 		pass
+	try:
+		category_id = request.GET["category"]
+		params['entries'] = Entry.objects.filter(category__pk=category_id).order_by('-date')
+	except:
+		pass
 	if request.method=="POST":
 		if "add-item" in request.POST:
 			form = ItemForm(request.POST)
@@ -66,4 +71,5 @@ def entry_list(request):
 	params["form"] = EntryForm()
 	params["form_c"] = CategoryForm()
 	params["form_s"] = StoreForm()
+	params["form_f"] = FilterForm()
 	return render(request, "app/entry_list.html", params)

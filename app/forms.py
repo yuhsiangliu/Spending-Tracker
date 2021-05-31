@@ -43,3 +43,11 @@ class ItemForm(ModelForm):
             'amount': forms.NumberInput(attrs={'class': 'form-control border border-dark', 'placeholder': 'Amount', }),
             'price': forms.NumberInput(attrs={'class': 'form-control border border-dark', 'placeholder': 'Price', }),
         }
+
+class FilterForm(ModelForm):
+	class Meta:
+		model = Entry
+		fields = ['category']
+		widgets = {
+            'category': forms.Select(attrs={'class': 'form-control', }),
+        }
