@@ -14,19 +14,22 @@ def entry_list(request):
 	params = {
 		"entries": all_entries,
 		"entry_clicked": False,
+		"add": "add",
+		"edit": "edit",
 	}
 	try:
 		entry_id = request.GET["e"]
 		params["entry_clicked"] = True
 		params["opened_entry"] = Entry.objects.get(pk=entry_id)
-		params["add_item_form"] = ItemForm(instance=params["opened_entry"])
+		params["add_item_form"] = ItemForm(initial={"Entry":params["opened_entry"]})
 	except:
 		pass
 	if request.method=="POST":
 		if "add-item" in request.POST:
-			form = ItemForm(request.POST, instance=params["opened_entry"])
-			if form.is_valid:
-				model = form.save()
+			form = ItemForm(request.POST)
+			if form.is_valid():
+				model = form.save(commit=False)
+				model.entry = params["opened_entry"]
 				model.save()
 				print('Saved?')
 			else:
@@ -41,17 +44,17 @@ def entry_list(request):
 			return response
 		elif "add-entry" in request.POST:	
 			form = EntryForm(request.POST)
-			if form.is_valid:
+			if form.is_valid():
 				model = form.save(commit=False)
 				model.save()
 		elif "add-category" in request.POST:
 			form_c = CategoryForm(request.POST)
-			if form_c.is_valid:
+			if form_c.is_valid():
 				model = form_c.save(commit=False)
 				model.save()
 		elif "add-store" in request.POST:
 			form_s = StoreForm(request.POST)
-			if form_s.is_valid:
+			if form_s.is_valid():
 				model = form_s.save(commit=False)
 				model.save()
 	params["form"] = EntryForm()
